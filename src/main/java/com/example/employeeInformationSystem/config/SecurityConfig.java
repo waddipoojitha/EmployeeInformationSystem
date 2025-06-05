@@ -15,7 +15,7 @@ public class SecurityConfig {
                 auth.anyRequest().authenticated()
             )
             .httpBasic(customizer -> {}) // Enable HTTP Basic Authentication
-            .csrf(csrf -> csrf.disable()) // ✅ Disable CSRF
+            .csrf(csrf -> csrf.disable()) //  Disable CSRF
             .build();
     }
 }
