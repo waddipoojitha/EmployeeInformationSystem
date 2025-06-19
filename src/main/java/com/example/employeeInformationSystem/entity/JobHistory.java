@@ -79,7 +79,6 @@ public class JobHistory {
         this.endDate = endDate;
         this.job = job;
         this.employee = employee;
-        // this.startDate=startDate;
     }
 
     @Override

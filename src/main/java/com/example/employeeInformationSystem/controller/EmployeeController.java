@@ -14,7 +14,6 @@ import com.example.employeeInformationSystem.dto.EmployeeDTO;
 import com.example.employeeInformationSystem.dto.JobHistoryDTO;
 
 import com.example.employeeInformationSystem.entity.Employee;
-import com.example.employeeInformationSystem.repository.JobHistoryRepository;
 import com.example.employeeInformationSystem.service.EmployeeService;
 
 
@@ -35,7 +34,7 @@ public class EmployeeController {
     @Autowired 
     private EmployeeService empService;
 
-    EmployeeController(JobHistoryRepository jobHistoryRepository, JobHistoryService jobHistoryService) {
+    EmployeeController( JobHistoryService jobHistoryService) {
         this.jobHistoryService = jobHistoryService;
     }
 
@@ -46,6 +45,7 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public List<EmployeeDTO> getEmployees(){
+
         return empService.getEmployees();
     }
 
@@ -82,7 +82,6 @@ public class EmployeeController {
         return jobHistoryService.findByEmployeeId(empId);
     }
 
-    
     @PutMapping("/employees/{empId}/salary")
     public ResponseEntity<String> updateSalary(@PathVariable int empId, @RequestParam Double newSalary) {
         Employee employee = empService.findById(empId); 
@@ -95,8 +94,4 @@ public class EmployeeController {
             return ResponseEntity.status(404).body("Employee not found.");
         }
     }
-
-
-
-
 }

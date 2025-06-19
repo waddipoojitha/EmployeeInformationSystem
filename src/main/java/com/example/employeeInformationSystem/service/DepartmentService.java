@@ -10,7 +10,7 @@ import com.example.employeeInformationSystem.dto.DepartmentDTO;
 
 import com.example.employeeInformationSystem.entity.Department;
 import com.example.employeeInformationSystem.entity.Employee;
-
+import com.example.employeeInformationSystem.exception.ResourceNotFoundException;
 import com.example.employeeInformationSystem.repository.DepartmentRepository;
 import com.example.employeeInformationSystem.repository.EmployeeRepository;
 
@@ -30,20 +30,21 @@ public class DepartmentService {
             dept.getHod()!=null?dept.getHod().getId():null
         )).collect(Collectors.toList());
     }
-    
 
     public Department createDepartment(Department department){
         return departmentRepo.save(department);
     }
 
     public void setHod(int deptId,int empId){
-        Department department=departmentRepo.findById(deptId).orElse(null);
-        Employee employee=employeeRepo.findById(empId).orElse(null);
+        Department department = departmentRepo.findById(deptId)
+           .orElseThrow(() -> new ResourceNotFoundException("Department not found with ID: " + deptId));
 
-        if(department !=null && employee!=null){
-            department.setHod(employee);
-            departmentRepo.save(department);
-        }
+        Employee employee = employeeRepo.findById(empId)
+           .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + empId));
+
+        department.setHod(employee);
+        departmentRepo.save(department);
     }
+
 }
 

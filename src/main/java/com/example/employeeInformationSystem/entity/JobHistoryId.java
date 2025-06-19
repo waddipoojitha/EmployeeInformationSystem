@@ -14,6 +14,8 @@ public class JobHistoryId implements Serializable{
     private int employeeId;
     @Column(name="start_date")
     private LocalDate startDate;
+    
+   
     public int getJobId() {
         return jobId;
     }

@@ -9,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.employeeInformationSystem.dto.EmployeeDTO;
-
 import com.example.employeeInformationSystem.entity.Employee;
+import com.example.employeeInformationSystem.exception.ResourceNotFoundException;
 import com.example.employeeInformationSystem.repository.EmployeeRepository;
-
 
 @Service
 public class EmployeeService {
@@ -100,13 +99,11 @@ public class EmployeeService {
     }
 
     public Employee findById(int empId) {
-        return employeeRepo.findAllById(empId);
+    return employeeRepo.findById(empId)
+           .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + empId));
     }
-    
 
     public void save(Employee employee) {
         employeeRepo.save(employee);
     }
-
-
 }

@@ -40,6 +40,4 @@ public class DepartmentController {
     public void setHod(@PathVariable int deptId,@PathVariable int empId){
         departmentService.setHod(deptId,empId);
     }
-    
-    
 }

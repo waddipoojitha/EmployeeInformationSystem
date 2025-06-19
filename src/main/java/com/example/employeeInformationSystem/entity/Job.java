@@ -28,20 +28,14 @@ public class Job {
     public void setTitle(String title) {
         this.title = title;
     }
-    
-    
 
     public Job() {
     }
-
-
 
     public Job(String title, List<Employee> employees) {
         this.title = title;
         this.employees = employees;
     }
-
-
 
     @OneToMany(mappedBy = "job",cascade = CascadeType.ALL)
     private List<Employee> employees;
